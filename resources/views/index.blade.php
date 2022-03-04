@@ -35,6 +35,7 @@
         </div>
         <a class="button is-info" href="{{ route('films.create') }}">Créer un
         film</a>
+        <a class="button is-info" href="{{ route('contact.create') }}">Contact me</a>
         </header>
         <div class="card-content">
             <div class="content">
