@@ -19,7 +19,10 @@ Route::get('/', function () {
 
     
 });
+
+Route::delete('films/force/{id}', [FilmController::class, 'forceDestroy'])->name('films.force.destroy');
+Route::put('films/restore/{id}', [FilmController::class, 'restore'])->name('films.restore');
+
 Route::resource('films', FilmController::class);
-Route::delete('films/force/{film}', [FilmController::class, 'forceDestroy'])->name('films.force.destroy');
-Route::put('films/restore/{film}', [FilmController::class, 'restore'])->name('films.restore');
+
 Route::get('category/{slug}/films', [FilmController::class, 'index'])->name('films.category');

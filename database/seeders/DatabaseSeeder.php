@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Category::factory()->count(10)->create();
-$ids = range(1, 10);
-Film::factory()->count(40)->create()->each(function ($film) use($ids) {
-shuffle($ids);
-$film->categories()->attach(array_slice($ids, 0, rand(1, 4)));
-});
+        $ids = range(1, 10);
+        Film::factory()->count(40)->create()->each(function ($film) use($ids) {
+        shuffle($ids);
+        $film->category()->attach(array_slice($ids, 0, rand(1, 4)));
+        });
     }
 }

@@ -34,9 +34,10 @@ public function create()
 */
 public function store(FilmRequest $filmRequest)
 {
-Film::create($filmRequest->all());
-return redirect()->route('films.index')->with('info', 'Le film a bien été
-créé');
+    $film = Film::create($filmRequest->all());
+    $film->categories()->attach($filmRequest->cats);
+    return redirect()->route('films.index')->with('info', 'Le film a bien été
+    créé');
 }
 /**
 * Display the specified resource.
@@ -46,8 +47,7 @@ créé');
 */
 public function show(Film $film)
 {
-$category = $film->category->name;
-return view('show', compact('film', 'category'));
+    return view('show', compact('film'));
 }
 /**
 * Show the form for editing the specified resource.
@@ -68,8 +68,10 @@ return view('edit', compact('film'));
 */
 public function update(FilmRequest $filmRequest, Film $film)
 {
-$film->update($filmRequest->all());
-return redirect()->route('films.index')->with('info', 'Le film a bien été modifié');
+    $film->update($filmRequest->all());
+    $film->categories()->sync($filmRequest->cats);
+    return redirect()->route('films.index')->with('info', 'Le film a bien été
+    modifié');
 }
 /**
 * Remove the specified resource from storage.
